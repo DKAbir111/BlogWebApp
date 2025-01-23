@@ -1,8 +1,17 @@
-export default function Navbar() {
+// 'use client'
+import Link from "next/link"
+import { RegisterLink, LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+export default async function Navbar() {
+    const { getUser } = getKindeServerSession();
+    const user = await getUser();
     const links = <>
-        <li><a>Item 1</a></li>
-        <li><a>Item 3</a></li>
+        <li><Link href={'/'}>Home</Link></li>
+        <>
+            {user?.email && <li><Link href={'/profile'}>Profile</Link></li>}
+        </>
     </>
+
     return (
         <nav>
             <div className="navbar bg-base-100">
@@ -35,8 +44,19 @@ export default function Navbar() {
                         {links}
                     </ul>
                 </div>
-                <div className="navbar-end">
-                    <a className="btn">Button</a>
+                <div className="navbar-end gap-2">
+                    <>
+                        {
+                            user?.email ? <>
+                                <LogoutLink><button className="btn rounded-sm">Logout</button></LogoutLink>
+                            </> :
+                                <>
+                                    <LoginLink ><button className="btn rounded-sm">Login</button></LoginLink >
+                                    <RegisterLink>   <button className="btn rounded-sm">Register</button></RegisterLink>
+                                </>
+
+                        }
+                    </>
                 </div>
             </div>
         </nav>
