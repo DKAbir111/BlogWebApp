@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function BlogCard({ post }) {
     return (
         <div className="card bg-base-100  shadow-xl">
@@ -5,7 +7,7 @@ export default function BlogCard({ post }) {
                 <h2 className="card-title">{post.title}</h2>
                 <p>If a dog chews shoes whose shoes does he choose?</p>
                 <div className="card-actions justify-end">
-                    <button className="btn btn-primary">View Details</button>
+                    <Link href={`/${post.id}`}><button className="btn btn-primary">View Details</button></Link>
                 </div>
             </div>
         </div>
