@@ -7,7 +7,7 @@ export default async function Profile() {
         redirect('/');
     }
     return (
-        <main className="min-h-screen">
+        <main className="min-h-screen flex flex-col justify-center items-center">
             <h2 className="text-center py-10 text-orange-500 text-2xl font-semibold">"Welcome to your profile!"</h2>
         </main>
     )
